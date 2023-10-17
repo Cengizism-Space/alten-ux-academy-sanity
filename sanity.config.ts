@@ -5,7 +5,7 @@ import {schemaTypes} from './schemas'
 
 export default defineConfig({
   name: 'default',
-  title: 'alten-ux-academy',
+  title: 'Alten UX Academy',
 
   projectId: 'ls5ort2p',
   dataset: 'production',
