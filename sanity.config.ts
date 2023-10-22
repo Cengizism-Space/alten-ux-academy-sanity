@@ -16,11 +16,12 @@ import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
 
 import blockContentType from './schemas/blockContent'
 import categoryType from './schemas/category'
+import sectionType from './schemas/section'
 import postType from './schemas/post'
 import authorType from './schemas/author'
 import settingsType from './schemas/settings'
 
-const schemaTypes = [postType, authorType, categoryType, blockContentType, settingsType]
+const schemaTypes = [authorType, categoryType, sectionType, blockContentType, postType, settingsType]
 
 export default defineConfig({
   name: 'default',
