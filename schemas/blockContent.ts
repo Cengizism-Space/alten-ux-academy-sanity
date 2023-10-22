@@ -10,6 +10,34 @@ import {defineType, defineArrayMember} from 'sanity'
  *    type: 'blockContent'
  *  }
  */
+
+/*
+type: 'array',
+of: [
+  { type: 'block' },
+  {
+    type: 'image',
+    options: {
+      hotspot: true,
+    },
+    fields: [
+      {
+        name: 'caption',
+        type: 'string',
+        title: 'Image caption',
+        description: 'Caption displayed below the image.',
+      },
+      {
+        name: 'alt',
+        type: 'string',
+        title: 'Alternative text',
+        description: 'Important for SEO and accessiblity.',
+      },
+    ],
+  },
+],
+*/
+
 export default defineType({
   title: 'Block Content',
   name: 'blockContent',
