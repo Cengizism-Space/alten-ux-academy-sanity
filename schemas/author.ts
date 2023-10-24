@@ -3,7 +3,7 @@ import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'author',
-  title: 'Author',
+  title: 'Authors',
   icon: UserIcon,
   type: 'document',
   fields: [
@@ -20,27 +20,19 @@ export default defineType({
       options: {
         source: 'name',
         maxLength: 96,
+        isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
     }),
     defineField({
       name: 'picture',
       title: 'Picture',
       type: 'image',
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative text',
-          description: 'Important for SEO and accessiblity.',
-        },
-      ],
       options: { hotspot: true },
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'website',
       title: 'Website',
-      type: 'string',
+      type: 'url',
     }),
     defineField({
       name: 'description',
@@ -50,7 +42,7 @@ export default defineType({
         {
           title: 'Block',
           type: 'block',
-          styles: [{title: 'Normal', value: 'normal'}],
+          styles: [{ title: 'Normal', value: 'normal' }],
           lists: [],
         },
       ],
