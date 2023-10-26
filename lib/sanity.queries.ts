@@ -1,58 +1,58 @@
 import { groq } from 'next-sanity'
 
-const postFields = groq`
+const cardFields = groq`
   _id,
   title,
   date,
   _updatedAt,
-  excerpt,
+  summary,
   coverImage,
   "slug": slug.current,
-  "author": author->{name, picture},
+  "source": source->{name, picture},
 `
 
 export const settingsQuery = groq`*[_type == "settings"][0]`
 
 export const indexQuery = groq`
-*[_type == "post"] | order(date desc, _updatedAt desc) {
-  ${postFields}
+*[_type == "card"] | order(date desc, _updatedAt desc) {
+  ${cardFields}
 }`
 
-export const postAndMoreStoriesQuery = groq`
+export const cardAndMoreStoriesQuery = groq`
 {
-  "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
+  "card": *[_type == "card" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
-    ${postFields}
+    ${cardFields}
   },
-  "morePosts": *[_type == "post" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+  "moreCards": *[_type == "card" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
     content,
-    ${postFields}
+    ${cardFields}
   }
 }`
 
-export const postSlugsQuery = groq`
-*[_type == "post" && defined(slug.current)][].slug.current
+export const cardSlugsQuery = groq`
+*[_type == "card" && defined(slug.current)][].slug.current
 `
 
-export const postBySlugQuery = groq`
-*[_type == "post" && slug.current == $slug][0] {
-  ${postFields}
+export const cardBySlugQuery = groq`
+*[_type == "card" && slug.current == $slug][0] {
+  ${cardFields}
 }
 `
 
-export interface Author {
+export interface Source {
   name?: string
   picture?: any
 }
 
-export interface Post {
+export interface Card {
   _id: string
   title?: string
   coverImage?: any
   date?: string
   _updatedAt?: string
-  excerpt?: string
-  author?: Author
+  summary?: string
+  source?: Source
   slug?: string
   content?: any
 }

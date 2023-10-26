@@ -14,21 +14,21 @@ import { deskTool } from 'sanity/desk'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
 
-import careerType from './schemas/career'
-import sectionType from './schemas/section'
+import pathType from './schemas/path'
+import deckType from './schemas/deck'
 import categoryType from './schemas/category'
-import postType from './schemas/post'
+import cardType from './schemas/card'
 import blockContentType from './schemas/blockContent'
-import authorType from './schemas/author'
+import sourceType from './schemas/source'
 import settingsType from './schemas/settings'
 
 const schemaTypes = [
-  careerType,
-  sectionType,
+  pathType,
+  deckType,
   categoryType,
-  postType,
+  cardType,
   blockContentType,
-  authorType,
+  sourceType,
   settingsType
 ]
 
@@ -49,7 +49,7 @@ export default defineConfig({
     previewUrl({
       base: DRAFT_MODE_ROUTE,
       urlSecretId: previewSecretId,
-      matchTypes: [postType.name, settingsType.name],
+      matchTypes: [cardType.name, settingsType.name],
     }),
     unsplashImageAsset(),
     visionTool({ defaultApiVersion: apiVersion }),

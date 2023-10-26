@@ -11,14 +11,14 @@ import {
   Iframe,
   type IframeOptions,
 } from 'sanity-plugin-iframe-pane'
-import authorType from '../../schemas/author'
-import postType from '../../schemas/post'
+import sourceType from '../../schemas/source'
+import cardType from '../../schemas/card'
 
-import AuthorAvatarPreviewPane from './AuthorAvatarPreviewPane'
+import AuthorAvatarPreviewPane from './SourceAvatarPreviewPane'
 
 const urlResolver = defineUrlResolver({
   base: DRAFT_MODE_ROUTE,
-  requiresSlug: [postType.name],
+  requiresSlug: [cardType.name],
 })
 const iframeOptions = {
   url: urlResolver,
@@ -29,7 +29,7 @@ const iframeOptions = {
 export const previewDocumentNode = (): DefaultDocumentNodeResolver => {
   return (S, { schemaType }) => {
     switch (schemaType) {
-      case authorType.name:
+      case sourceType.name:
         return S.document().views([
           S.view.form(),
           S.view
@@ -42,7 +42,7 @@ export const previewDocumentNode = (): DefaultDocumentNodeResolver => {
             .title('Preview'),
         ])
 
-      case postType.name:
+      case cardType.name:
         return S.document().views([
           S.view.form(),
           S.view.component(Iframe).options(iframeOptions).title('Preview'),

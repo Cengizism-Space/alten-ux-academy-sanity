@@ -2,11 +2,11 @@ import { BookIcon } from '@sanity/icons'
 import { format, parseISO } from 'date-fns'
 import { defineField, defineType } from 'sanity'
 import categoryType from './category'
-import authorType from './author'
+import sourceType from './source'
 
 export default defineType({
-  name: 'post',
-  title: 'Posts',
+  name: 'card',
+  title: 'Cards',
   icon: BookIcon,
   type: 'document',
   fields: [
@@ -28,6 +28,11 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'published',
+      title: 'Publish',
+      type: 'boolean',
+    }),
+    defineField({
       name: 'category',
       title: 'Category',
       type: 'reference',
@@ -43,8 +48,8 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'excerpt',
-      title: 'Excerpt',
+      name: 'summary',
+      title: 'Summary',
       type: 'text',
     }),
     defineField({
@@ -53,34 +58,34 @@ export default defineType({
       type: 'blockContent',
     }),
     defineField({
-      name: 'relations',
+      name: 'related_to',
       title: 'See also',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'post' } }],
+      of: [{ type: 'reference', to: { type: 'card' } }],
     }),
     defineField({
-      name: 'nicks',
+      name: 'also_called',
       title: 'Also called',
       type: 'array',
       of: [{ type: 'string' }],
     }),
     defineField({
-      name: 'contrast',
+      name: 'in_contrast',
       title: 'In contrast',
       type: 'reference',
-      to: [{ type: 'post' }],
+      to: [{ type: 'card' }],
     }),
     defineField({
-      name: 'sources',
-      title: 'Sources',
+      name: 'more_to_read',
+      title: 'More to read',
       type: 'array',
       of: [{ type: 'url' }],
     }),
     defineField({
-      name: 'author',
-      title: 'Author',
+      name: 'source',
+      title: 'Source',
       type: 'reference',
-      to: [{ type: authorType.name }],
+      to: [{ type: sourceType.name }],
     }),
     defineField({
       name: 'date',
@@ -92,13 +97,13 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      author: 'author.name',
+      source: 'source.name',
       date: 'date',
       media: 'coverImage',
     },
-    prepare({ title, media, author, date }) {
+    prepare({ title, media, source, date }) {
       const subtitles = [
-        author && `by ${author}`,
+        source && `by ${source}`,
         date && `on ${format(parseISO(date), 'LLL d, yyyy')}`,
       ].filter(Boolean)
 

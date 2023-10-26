@@ -2,8 +2,8 @@ import { UserIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'author',
-  title: 'Authors',
+  name: 'source',
+  title: 'Sources',
   icon: UserIcon,
   type: 'document',
   fields: [

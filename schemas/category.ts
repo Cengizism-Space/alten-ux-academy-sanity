@@ -11,14 +11,14 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'section',
+      name: 'deck',
       type: 'object',
       fields: [
         {
-          title: 'Section',
-          name: 'section',
+          title: 'Deck',
+          name: 'deck',
           type: 'reference',
-          to: [{ type: 'section' }]
+          to: [{ type: 'deck' }]
         }
       ]
     }),
