@@ -11,6 +11,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'published',
+      title: 'Publish',
+      type: 'boolean',
+    }),
+    defineField({
       name: 'path',
       type: 'object',
       fields: [
@@ -21,6 +26,12 @@ export default defineType({
           to: [{ type: 'path' }]
         }
       ]
+    }),
+    defineField({
+      name: 'cover',
+      title: 'Cover',
+      type: 'image',
+      options: { hotspot: true },
     }),
     defineField({
       name: 'description',
